@@ -20,6 +20,11 @@ namespace Reportes
                 {
                     //header
                     INTF intf = new INTF();
+                    if(data.Rows.Count > 0)
+                    {
+                        intf.fechaReporte = data.Rows[0]["Fecha de reporte de informacion"].ToString();
+                    }
+                    
                     //intf.version = this.GetFolio().PadLeft(2, '0'); //consecutive folio
                     file.Write(intf.ToString());
                     file.Write("\n"); //new line

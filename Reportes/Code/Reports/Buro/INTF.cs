@@ -12,7 +12,7 @@ namespace Reportes
         private readonly String claveUsuario = "FF33890001";
         private readonly String nombreUsuario = "CREDIJAL".PadRight(16, ' ');
         private readonly String reservado = "40";
-        private readonly String fechaReporte = DateTime.Now.ToString("ddMMyyyy");
+        public String fechaReporte;
         private readonly String reservado2 = "0000000000";
         private readonly String informacionAdicional = String.Empty.PadRight(98, ' ');
 
