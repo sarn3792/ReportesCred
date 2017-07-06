@@ -7,7 +7,7 @@ namespace Reportes
 {
     public class EM
     {
-        public DatoMoral identificadorSegmento = new DatoMoral("EM", "EM", 20);
+        public DatoMoral identificadorSegmento = new DatoMoral("EM", "EM", 2);
         public DatoMoral RFC = new DatoMoral("00", 13);
         public DatoMoral CURP = new DatoMoral("01", 18);
         public DatoMoral reservado = new DatoMoral("02", String.Empty.PadRight(10, '0'), 10);
