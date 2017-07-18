@@ -251,10 +251,6 @@
                                     </td>
                                 </tr>
                             </table>
-
-                            <div class="text-center">
-                                <asp:Button ID="btnEditar" runat="server" Text="Editar" Visible="false" CssClass="btn btn-primary top-buffer" OnClick="btnEditar_Click" />
-                            </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="text-center">
@@ -359,6 +355,9 @@
                 -->
                     <div class="row">
                         <div class="col-sm-12">
+                            <div class="text-center">
+                                <asp:Button ID="btnEditar" runat="server" Text="Editar" Visible="false" CssClass="btn btn-primary top-buffer" OnClick="btnEditar_Click" style="margin-top: -30px;"/>
+                            </div>
                             <table class="table table-hover">
                                 <tr>
                                     <td class="col-sm-2">

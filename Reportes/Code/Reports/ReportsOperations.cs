@@ -158,9 +158,9 @@ namespace Reportes
                     case "1":
                         query = String.Format(@"SELECT x.xCnbvSOFOMES as ID, FORMAT(convert(datetime,convert(varchar(10),x.FechaOperacion,120)), 'dd/MM/yyyy') 'Fecha operación', 'Relevante' as 'Tipo reporte', 
                                             x.RazonSocial as 'Nombre', 
-                                            x.NumCueConOpe 'Número de control', CASE WHEN x.Estatus IS NULL THEN 'SI' ELSE 'NO' END as Reportar, 
+                                            x.NumCueConOpe 'Número de control', x.ReciboDePago 'Recibo de pago', CASE WHEN x.Estatus IS NULL THEN 'SI' ELSE 'NO' END as Reportar, 
                                             T.TipoOperacion 'Tipo de operación', FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', 
-											x.Localidad, x.Monto, 
+											CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', 
                                             x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.TipoReporte = '1' ");
@@ -169,9 +169,9 @@ namespace Reportes
                     case "2":
                         query = String.Format(@"SELECT x.xCnbvSOFOMES as ID, FORMAT(convert(datetime,convert(varchar(10),x.FechaOperacion,120)), 'dd/MM/yyyy') 'Fecha operación', 'Inusual' as 'Tipo reporte', 
                                             x.RazonSocial as 'Nombre',
-                                            x.NumCueConOpe 'Número de control', CASE WHEN x.Estatus IS NULL THEN 'SI' ELSE 'NO' END as Reportar, 
+                                            x.NumCueConOpe 'Número de control', x.ReciboDePago 'Recibo de pago', CASE WHEN x.Estatus IS NULL THEN 'SI' ELSE 'NO' END as Reportar, 
                                             T.TipoOperacion 'Tipo de operación',  FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', 
-											x.Localidad, x.Monto, 
+											CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', 
                                             x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.TipoReporte = '2' ");
@@ -182,7 +182,7 @@ namespace Reportes
                                             x.RazonSocial as 'Nombre', 
                                             x.NumCueConOpe 'Número de control', CASE WHEN x.Estatus IS NULL THEN 'SI' ELSE 'NO' END as Reportar, 
                                             T.TipoOperacion 'Tipo de operación', FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', 
-											x.Localidad, x.Monto, 
+											CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', 
                                             x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.TipoReporte = '3' ");
@@ -193,7 +193,7 @@ namespace Reportes
                                             x.RazonSocial as 'Nombre',
                                             x.NumCueConOpe 'Número de control', CASE WHEN x.Estatus IS NULL THEN 'SI' ELSE 'NO' END as Reportar, 
                                             T.TipoOperacion 'Tipo de operación', FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', 
-											x.Localidad, x.Monto, 
+											CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', 
                                             x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.TipoReporte = '4' ");
@@ -204,7 +204,7 @@ namespace Reportes
                                             CASE x.TipoReporte WHEN 1 THEN 'Relevante' WHEN 2 THEN 'Inusual' WHEN 3 THEN 'Preocupante' WHEN 4 THEN '24 horas' END as 'Tipo Reporte', 
                                             x.RazonSocial as 'Nombre', 
                                             x.NumCueConOpe 'Número de control', 'SI' as Reportar, T.TipoOperacion 'Tipo de operación', 
-                                            FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', x.Localidad, x.Monto, x.Moneda
+                                            FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.Estatus IS NULL ");
                         break;
@@ -214,7 +214,7 @@ namespace Reportes
                                             CASE x.TipoReporte WHEN 1 THEN 'Relevante' WHEN 2 THEN 'Inusual' WHEN 3 THEN 'Preocupante' WHEN 4 THEN '24 horas' END as 'Tipo Reporte', 
                                             x.RazonSocial as 'Nombre', 
                                             x.NumCueConOpe 'Número de control', 'SI' as Reportar, T.TipoOperacion 'Tipo de operación', 
-                                            FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', x.Localidad, x.Monto, x.Moneda
+                                            FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.Estatus = 'SI' OR x.Estatus IS NULL ");
                         break;
@@ -224,7 +224,7 @@ namespace Reportes
                                             CASE x.TipoReporte WHEN 1 THEN 'Relevante' WHEN 2 THEN 'Inusual' WHEN 3 THEN 'Preocupante' WHEN 4 THEN '24 horas' END as 'Tipo Reporte', 
                                             x.RazonSocial as 'Nombre', 
                                             x.NumCueConOpe 'Número de control', 'NO' as Reportar, T.TipoOperacion 'Tipo de operación', 
-                                            FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', x.Localidad, x.Monto, x.Moneda
+                                            FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.Estatus = 'NO' ");
                         break;
