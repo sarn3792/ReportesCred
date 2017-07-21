@@ -412,7 +412,41 @@ namespace Reportes
             }
         }
 
-        public static void UpdateRegistro(String ID, String autorizadoPor, String motivoNoReportar)
+        public static InformationOperacion GetInformationOperacion(String IDReport)
+        {
+            try
+            {
+                String query = String.Format("SELECT * FROM xCnbvSOFOMES WHERE xCnbvSOFOMES = {0}", IDReport);
+                DataBaseSettings db = new DataBaseSettings();
+                DataTable aux = db.GetDataTable(query);
+                if (aux.Rows.Count > 0)
+                {
+                    return new InformationOperacion(aux.Rows[0]["AutorizadoPor"].ToString(), aux.Rows[0]["FechaDetOper"].ToString(), aux.Rows[0]["DescrOpera"].ToString());
+                }
+
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public class InformationOperacion
+        {
+            public String autorizadoPor;
+            public String fechaAutorizacion;
+            public String motivoParaNoReportar;
+
+            public InformationOperacion(String autorizadoPor, String fechaAutorizacion, String motivoParaNoReportar)
+            {
+                this.autorizadoPor = autorizadoPor;
+                this.fechaAutorizacion = fechaAutorizacion;
+                this.motivoParaNoReportar = motivoParaNoReportar;
+            }
+        }
+
+        public static void UpdateRegistro(String ID, String autorizadoPor, String motivoNoReportar, DateTime fechaDetOper)
         {
             try
             {

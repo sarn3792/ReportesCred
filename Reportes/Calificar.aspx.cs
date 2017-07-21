@@ -216,7 +216,7 @@ namespace Reportes
         private void EditFields(bool flag)
         {
             rblReportar.Enabled = flag;
-            //txtFechaAutorizacion.Enabled = flag;
+            txtFechaAutorizacion.Enabled = flag;
             ddlAutorizadoPor.Enabled = flag;
             ddlMotivoNoReportar.Enabled = flag;
             //txtCriterioPLD.Enabled = flag;
@@ -232,7 +232,7 @@ namespace Reportes
             {
                 if (gvInformation.SelectedRow != null)
                 {
-                    ReportsOperations.UpdateRegistro(gvInformation.SelectedRow.Cells[0].Text, ddlAutorizadoPor.SelectedItem.Text, ddlMotivoNoReportar.SelectedItem.Text);
+                    ReportsOperations.UpdateRegistro(gvInformation.SelectedRow.Cells[0].Text, ddlAutorizadoPor.SelectedItem.Text, ddlMotivoNoReportar.SelectedItem.Text, DateTime.ParseExact(txtFechaAutorizacion.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture));
                     ShowMessage(false);
                     ddlAutorizadoPor.SelectedValue = "0";
                     ddlMotivoNoReportar.SelectedValue = "0";
@@ -261,8 +261,10 @@ namespace Reportes
         protected void gvInformation_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnEditar.Visible = false;
-            txtCriterioPLD.Text = String.Empty;
+            txtCriterioPLD.Text = String.Empty; 
+            txtFechaAutorizacion.Text = String.Empty;
 
+       
             foreach (GridViewRow row in gvInformation.Rows)
             {
                 if (row.RowIndex == gvInformation.SelectedIndex) //when row is selected
@@ -274,9 +276,19 @@ namespace Reportes
                     String ID = gvInformation.SelectedRow.Cells[0].Text;
                     txtCriterioPLD.Text = ReportsOperations.GetDescripcionOperacion(ID);
 
-                    if (row.Cells[5].Text != "NO" && ddlTipoReporte.SelectedItem.Value != "1" && ddlTipoReporte.SelectedItem.Value != "7")
+                    if (row.Cells[6].Text != "NO") 
                     { //inusuales y no reportados no se pueden modificar
-                        btnEditar.Visible = true;
+                        if (ddlTipoReporte.SelectedItem.Value != "1" && ddlTipoReporte.SelectedItem.Value != "7")
+                        {
+                            btnEditar.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        //ReportsOperations.InformationOperacion data = ReportsOperations.GetInformationOperacion(ID);
+                        //ddlAutorizadoPor.SelectedItem.Text = data.autorizadoPor;
+                        //txtFechaAutorizacion.Text = data.fechaAutorizacion;
+                        //ddlMotivoNoReportar.SelectedItem.Text = data.motivoParaNoReportar;
                     }
 
                 }
@@ -286,9 +298,10 @@ namespace Reportes
                     row.ToolTip = "Click to select this row.";
                 }
 
-                ddlAutorizadoPor.SelectedValue = "0";
-                ddlMotivoNoReportar.SelectedValue = "0";           
+                //ddlAutorizadoPor.SelectedValue = "0";
+                //ddlMotivoNoReportar.SelectedValue = "0";           
             }
+
         }
 
         private void ClearAllPage()
