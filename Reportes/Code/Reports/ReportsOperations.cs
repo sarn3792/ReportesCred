@@ -451,7 +451,7 @@ namespace Reportes
             try
             {
                 String query = String.Format("UPDATE xCnbvSOFOMES SET AutorizadoPor = '{0}', FechaDetOper = '{1}', DescrOpera = '{2}', Estatus = 'NO' WHERE xCnbvSOFOMES = {3}",
-                                autorizadoPor, DateTime.Now.ToString("yyyyMMdd"), motivoNoReportar, ID);
+                                autorizadoPor, /*DateTime.Now.ToString("yyyyMMdd") */ fechaDetOper.ToString("yyyyMMdd"), motivoNoReportar, ID);
                 DataBaseSettings db = new DataBaseSettings();
                 db.ExecuteQuery(query);
             }

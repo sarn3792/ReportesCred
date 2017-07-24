@@ -263,8 +263,9 @@ namespace Reportes
             btnEditar.Visible = false;
             txtCriterioPLD.Text = String.Empty; 
             txtFechaAutorizacion.Text = String.Empty;
+            ddlAutorizadoPor.SelectedValue = "0";
+            ddlMotivoNoReportar.SelectedValue = "0";
 
-       
             foreach (GridViewRow row in gvInformation.Rows)
             {
                 if (row.RowIndex == gvInformation.SelectedIndex) //when row is selected
@@ -285,10 +286,10 @@ namespace Reportes
                     }
                     else
                     {
-                        //ReportsOperations.InformationOperacion data = ReportsOperations.GetInformationOperacion(ID);
-                        //ddlAutorizadoPor.SelectedItem.Text = data.autorizadoPor;
-                        //txtFechaAutorizacion.Text = data.fechaAutorizacion;
-                        //ddlMotivoNoReportar.SelectedItem.Text = data.motivoParaNoReportar;
+                        ReportsOperations.InformationOperacion data = ReportsOperations.GetInformationOperacion(ID);
+                        ddlAutorizadoPor.SelectedIndex = ddlAutorizadoPor.Items.IndexOf(ddlAutorizadoPor.Items.FindByText(data.autorizadoPor));
+                        txtFechaAutorizacion.Text = data.fechaAutorizacion;
+                        ddlMotivoNoReportar.SelectedIndex = ddlMotivoNoReportar.Items.IndexOf(ddlMotivoNoReportar.Items.FindByText(data.motivoParaNoReportar));
                     }
 
                 }
@@ -297,9 +298,6 @@ namespace Reportes
                     row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
                     row.ToolTip = "Click to select this row.";
                 }
-
-                //ddlAutorizadoPor.SelectedValue = "0";
-                //ddlMotivoNoReportar.SelectedValue = "0";           
             }
 
         }
