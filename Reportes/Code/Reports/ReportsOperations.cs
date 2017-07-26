@@ -203,7 +203,7 @@ namespace Reportes
                         query = String.Format(@"SELECT x.xCnbvSOFOMES as ID, FORMAT(convert(datetime,convert(varchar(10),x.FechaOperacion,120)), 'dd/MM/yyyy') 'Fecha operación', 
                                             CASE x.TipoReporte WHEN 1 THEN 'Relevante' WHEN 2 THEN 'Inusual' WHEN 3 THEN 'Preocupante' WHEN 4 THEN '24 horas' END as 'Tipo Reporte', 
                                             x.RazonSocial as 'Nombre', 
-                                            x.NumCueConOpe 'Número de control', 'SI' as Reportar, T.TipoOperacion 'Tipo de operación', 
+                                            x.NumCueConOpe 'Número de control', x.ReciboDePago 'Recibo de pago', 'SI' as Reportar, T.TipoOperacion 'Tipo de operación', 
                                             FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.Estatus IS NULL ");
@@ -213,7 +213,7 @@ namespace Reportes
                         query = String.Format(@"SELECT x.xCnbvSOFOMES as ID, FORMAT(convert(datetime,convert(varchar(10),x.FechaOperacion,120)), 'dd/MM/yyyy') 'Fecha operación', 
                                             CASE x.TipoReporte WHEN 1 THEN 'Relevante' WHEN 2 THEN 'Inusual' WHEN 3 THEN 'Preocupante' WHEN 4 THEN '24 horas' END as 'Tipo Reporte', 
                                             x.RazonSocial as 'Nombre', 
-                                            x.NumCueConOpe 'Número de control', 'SI' as Reportar, T.TipoOperacion 'Tipo de operación', 
+                                            x.NumCueConOpe 'Número de control', x.ReciboDePago 'Recibo de pago', 'SI' as Reportar, T.TipoOperacion 'Tipo de operación', 
                                             FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.Estatus = 'SI' OR x.Estatus IS NULL ");
@@ -223,7 +223,7 @@ namespace Reportes
                         query = String.Format(@"SELECT x.xCnbvSOFOMES as ID, FORMAT(convert(datetime,convert(varchar(10),x.FechaOperacion,120)), 'dd/MM/yyyy') 'Fecha operación', 
                                             CASE x.TipoReporte WHEN 1 THEN 'Relevante' WHEN 2 THEN 'Inusual' WHEN 3 THEN 'Preocupante' WHEN 4 THEN '24 horas' END as 'Tipo Reporte', 
                                             x.RazonSocial as 'Nombre', 
-                                            x.NumCueConOpe 'Número de control', 'NO' as Reportar, T.TipoOperacion 'Tipo de operación', 
+                                            x.NumCueConOpe 'Número de control', x.ReciboDePago 'Recibo de pago', 'NO' as Reportar, T.TipoOperacion 'Tipo de operación', 
                                             FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
                                             WHERE x.Estatus = 'NO' ");
@@ -416,7 +416,9 @@ namespace Reportes
         {
             try
             {
-                String query = String.Format("SELECT * FROM xCnbvSOFOMES WHERE xCnbvSOFOMES = {0}", IDReport);
+                String query = String.Format(@"SELECT FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper,120)), 'dd/MM/yyyy') 'FechaDetOper', 
+                                                x.AutorizadoPor, x.DescrOpera
+                                                FROM xCnbvSOFOMES x WHERE x.xCnbvSOFOMES = {0}", IDReport);
                 DataBaseSettings db = new DataBaseSettings();
                 DataTable aux = db.GetDataTable(query);
                 if (aux.Rows.Count > 0)

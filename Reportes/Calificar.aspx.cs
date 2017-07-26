@@ -166,7 +166,11 @@ namespace Reportes
         {
             try
             {
-                txtFiltroNombre.Text = String.Empty;
+                btnEditar.Visible = false;
+                txtCriterioPLD.Text = String.Empty;
+                txtFechaAutorizacion.Text = String.Empty;
+                ddlAutorizadoPor.SelectedValue = "0";
+                ddlMotivoNoReportar.SelectedValue = "0";
                 BindData();
             }
             catch (Exception ex)
@@ -277,7 +281,17 @@ namespace Reportes
                     String ID = gvInformation.SelectedRow.Cells[0].Text;
                     txtCriterioPLD.Text = ReportsOperations.GetDescripcionOperacion(ID);
 
-                    if (row.Cells[6].Text != "NO") 
+                    string calificar;
+                    if(ddlTipoReporte.SelectedItem.Value == "3" || ddlTipoReporte.SelectedItem.Value == "4") //para los reportes internas preocupantes y 24 horas no existe la columna número de control, por eso es una posición antes
+                    {
+                        calificar = row.Cells[5].Text;
+                    }
+                    else
+                    {
+                        calificar = row.Cells[6].Text;
+                    }
+
+                    if (calificar != "NO") 
                     { //inusuales y no reportados no se pueden modificar
                         if (ddlTipoReporte.SelectedItem.Value != "1" && ddlTipoReporte.SelectedItem.Value != "7")
                         {

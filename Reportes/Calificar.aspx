@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calificar.aspx.cs" Inherits="Reportes.Calificar" EnableEventValidation="false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calificar.aspx.cs" Inherits="Reportes.Calificar" EnableEventValidation="false" MaintainScrollPositionOnPostback="true"%>
 
 <!DOCTYPE html>
 
