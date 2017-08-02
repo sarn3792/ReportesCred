@@ -29,7 +29,7 @@ namespace Reportes
                     information.TipoOperacion = data.Rows[i][8].ToString();
                     information.InstrumentoMonetario = data.Rows[i][9].ToString();
                     information.NumeroCuenta = data.Rows[i][10].ToString();
-                    information.Monto = Convert.ToDecimal(data.Rows[i][11].ToString());
+                    information.Monto = data.Rows[i][11].ToString().Trim() != String.Empty ? Convert.ToDecimal(data.Rows[i][11].ToString()) : 0;
                     information.Moneda = data.Rows[i][12].ToString();
                     information.FechaOperacion = data.Rows[i][13].ToString();
                     information.FechaDeteccion = data.Rows[i][14].ToString();
