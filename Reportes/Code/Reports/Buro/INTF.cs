@@ -8,7 +8,7 @@ namespace Reportes
     public class INTF
     {
         private readonly String etiquetaSegmento = "INTF";
-        public String version = "12";
+        public String version = "13";
         private readonly String claveUsuario = "FF33890001";
         private readonly String nombreUsuario = "CREDIJAL".PadRight(16, ' ');
         private readonly String reservado = "40";

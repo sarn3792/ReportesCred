@@ -33,6 +33,8 @@ namespace Reportes
         public Dato fechaPrimerIncumplimiento = new Dato("43", 8);
         public Dato saldoInsoluto = new Dato("44", 10);
         public Dato montoUltimoPago = new Dato("45", 9);
+        public Dato plazoEnMeses = new Dato("50", 6);
+        public Dato montoCreditoOriginacion = new Dato("51", 9);
         public Dato finSegmentoTL = new Dato("FIN", "99", 3);
 
         public override string ToString()
@@ -65,6 +67,8 @@ namespace Reportes
                 if (fechaPrimerIncumplimiento.Descripcion != String.Empty) final += fechaPrimerIncumplimiento.ToString();
                 if (saldoInsoluto.Descripcion != String.Empty) final += saldoInsoluto.ToString();
                 if (montoUltimoPago.Descripcion != String.Empty) final += montoUltimoPago.ToString();
+                if (plazoEnMeses.Descripcion != String.Empty) final += plazoEnMeses.ToString();
+                if (montoCreditoOriginacion.Descripcion != String.Empty) final += montoCreditoOriginacion.ToString();
 
                 final += finSegmentoTL.ToString();
 

@@ -35,7 +35,10 @@ namespace Reportes
                 if (apellidoMaterno.Descripcion != String.Empty) final += String.Format("{0}", apellidoMaterno.ToString());
                 if (apellidoAdicional.Descripcion != String.Empty) final += String.Format("{0}", apellidoAdicional.ToString());
                 if (primerNombre.Descripcion != String.Empty) final += String.Format("{0}", primerNombre.ToString());
-                if (segundoNombre.Descripcion != String.Empty) final += String.Format("{0}", segundoNombre.ToString());
+                if (segundoNombre.Descripcion != String.Empty)
+                    final += String.Format("{0}", segundoNombre.ToString());
+                else
+                    final += String.Format("{0}{1}", segundoNombre.Etiqueta, "00");
                 if (fechaNacimiento.Descripcion != String.Empty) final += String.Format("{0}", fechaNacimiento.ToString());
                 if (RFC.Descripcion != String.Empty) final += String.Format("{0}", RFC.ToString());
                 if (prefifoPersonal.Descripcion != String.Empty) final += String.Format("{0}", prefifoPersonal.ToString());

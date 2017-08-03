@@ -15,6 +15,7 @@ namespace Reportes
         public Dato estado = new Dato("04", 4);
         public Dato codigoPostal = new Dato("05", 5);
         public Dato numeroTelefono = new Dato("07", 11);
+        public Dato origenDomicilio = new Dato("12", 2);
 
         public override string ToString()
         {
@@ -29,6 +30,7 @@ namespace Reportes
                 if (estado.Descripcion != String.Empty) final += estado.ToString();
                 if (codigoPostal.Descripcion != String.Empty) final += codigoPostal.ToString();
                 if (numeroTelefono.Descripcion != String.Empty) final += numeroTelefono.ToString();
+                if (origenDomicilio.Descripcion != String.Empty) final += origenDomicilio.ToString();
 
                 return final;
 

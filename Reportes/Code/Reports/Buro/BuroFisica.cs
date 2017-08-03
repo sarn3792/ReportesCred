@@ -66,6 +66,7 @@ namespace Reportes
                         pa.estado.Descripcion = data.Rows[i]["ESTADO"].ToString();
                         pa.codigoPostal.Descripcion = data.Rows[i]["CODIGO POSTAL"].ToString();
                         pa.numeroTelefono.Descripcion = data.Rows[i]["NUMERO DE TELEFONO"].ToString();
+                        pa.origenDomicilio.Descripcion = data.Rows[i]["ORIGEN DEL DOMICILIO"].ToString();
                         file.Write(pa.ToString());
                         file.Flush();
 
@@ -93,6 +94,8 @@ namespace Reportes
                         tl.fechaPrimerIncumplimiento.Descripcion = data.Rows[i]["FECHA DE PRIMER INCUMPLIMIENTO"].ToString();
                         tl.saldoInsoluto.Descripcion = data.Rows[i]["SALDO INSOLUTO DEL PRINCIPAL"].ToString();
                         tl.montoUltimoPago.Descripcion = data.Rows[i]["MONTO DE ULTIMO PAGO"].ToString();
+                        tl.plazoEnMeses.Descripcion = data.Rows[i]["PLAZO EN MESES"].ToString();
+                        tl.montoCreditoOriginacion.Descripcion = data.Rows[i]["MONTO CREDITO ORIGINACION"].ToString();
                         file.Write(tl.ToString());
                         file.Flush();
 
