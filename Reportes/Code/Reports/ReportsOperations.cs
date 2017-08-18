@@ -448,12 +448,13 @@ namespace Reportes
             }
         }
 
-        public static void UpdateRegistro(String ID, String autorizadoPor, String motivoNoReportar, DateTime fechaDetOper)
+        public static void UpdateRegistro(String ID, String autorizadoPor, String motivoNoReportar, DateTime fechaDetOper, bool reportar, String RazConsInusual)
         {
             try
             {
-                String query = String.Format("UPDATE xCnbvSOFOMES SET AutorizadoPor = '{0}', FechaDetOper = '{1}', DescrOpera = '{2}', Estatus = 'NO' WHERE xCnbvSOFOMES = {3}",
-                                autorizadoPor, /*DateTime.Now.ToString("yyyyMMdd") */ fechaDetOper.ToString("yyyyMMdd"), motivoNoReportar, ID);
+                string report = reportar ? "SI" : "NO";
+                String query = String.Format("UPDATE xCnbvSOFOMES SET AutorizadoPor = '{0}', FechaDetOper = '{1}', DescrOpera = '{2}', Estatus = '{4}', RazConsInusual = '{5}' WHERE xCnbvSOFOMES = {3}",
+                                autorizadoPor, /*DateTime.Now.ToString("yyyyMMdd") */ fechaDetOper.ToString("yyyyMMdd"), motivoNoReportar, ID, report, RazConsInusual);
                 DataBaseSettings db = new DataBaseSettings();
                 db.ExecuteQuery(query);
             }
@@ -475,6 +476,47 @@ namespace Reportes
 
             } catch (Exception ex)
             {
+                throw ex;
+            }
+        }
+
+        public class PerfilTransaccional
+        {
+            public String actividadPrep;
+            public String manejoEfec;
+            public String montoEfectivoMensual;
+            public String numeroEstimadoMovimientos;
+            public String montoEstimadoMensual;
+        }
+
+        public static PerfilTransaccional GetPerfilTransaccional(String custID)
+        {
+            try
+            {
+                String query = String.Format(@"SELECT ActividadPrep, CASE s4Future09 WHEN 1 THEN 'SI' ELSE 'NO' END 'ManejoEfectivo', 
+                                            CONVERT(varchar, CAST(MontoEfeMen AS money), 1) 'MontoEfectivoMensual', NumeroEdMM 'NumeroEstimadoMovimientos', CONVERT(varchar, CAST(MontoEstMM AS money), 1) 'MontoEstimadoMensual' 
+                                            FROM xPld
+                                            WHERE CustId = '{0}'", custID);
+
+                DataBaseSettings db = new DataBaseSettings();
+                DataTable aux = db.GetDataTable(query);
+
+                if(aux.Rows.Count > 0)
+                {
+                    PerfilTransaccional data = new PerfilTransaccional();
+                    data.actividadPrep = aux.Rows[0]["ActividadPrep"].ToString();
+                    data.manejoEfec = aux.Rows[0]["ManejoEfectivo"].ToString();
+                    data.montoEfectivoMensual = aux.Rows[0]["MontoEfectivoMensual"].ToString();
+                    data.numeroEstimadoMovimientos = aux.Rows[0]["NumeroEstimadoMovimientos"].ToString();
+                    data.montoEstimadoMensual = aux.Rows[0]["MontoEstimadoMensual"].ToString();
+
+                    return data;
+                }
+
+                throw new Exception("No fue encontrado perfil transaccional para el cliente seleccionado. Verificar que tenga número de control.");
+            }
+            catch (Exception ex)
+            { 
                 throw ex;
             }
         }

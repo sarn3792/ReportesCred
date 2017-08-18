@@ -175,6 +175,15 @@ namespace Reportes {
         protected global::System.Web.UI.WebControls.ImageButton btnBuscarPorNombre;
         
         /// <summary>
+        /// lblTotalRegistros control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalRegistros;
+        
+        /// <summary>
         /// btnExportToExcel control.
         /// </summary>
         /// <remarks>
@@ -497,5 +506,104 @@ namespace Reportes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
+        
+        /// <summary>
+        /// pnlPerfilTransac control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPerfilTransac;
+        
+        /// <summary>
+        /// lblActividadPrep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblActividadPrep;
+        
+        /// <summary>
+        /// txtActividadPrep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtActividadPrep;
+        
+        /// <summary>
+        /// lblManejoEfectivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblManejoEfectivo;
+        
+        /// <summary>
+        /// txtManejoEfectivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtManejoEfectivo;
+        
+        /// <summary>
+        /// lblMontoEfectivoMensual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMontoEfectivoMensual;
+        
+        /// <summary>
+        /// txtMontoEfectivoMensual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMontoEfectivoMensual;
+        
+        /// <summary>
+        /// lblNumEstimadoMovMensual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumEstimadoMovMensual;
+        
+        /// <summary>
+        /// txtNumEstimadoMovMensual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNumEstimadoMovMensual;
+        
+        /// <summary>
+        /// lblMontoEstimadoMensual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMontoEstimadoMensual;
+        
+        /// <summary>
+        /// txtMontoEstimadoMensual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMontoEstimadoMensual;
     }
 }

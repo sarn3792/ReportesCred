@@ -114,10 +114,12 @@ namespace Reportes
                             if (aux.Rows.Count > 0)
                             {
                                 pnlFiltro.Visible = true;
+                                lblTotalRegistros.Text = String.Format("{0} registros", aux.Rows.Count);
                             }
                             else
                             {
                                 txtFiltroNombre.Text = String.Empty;
+                                lblTotalRegistros.Text = String.Empty;
                                 pnlFiltro.Visible = false;
                                 ShowMessage(true, "No fueron encontrados registros con dichos criterios de búsqueda");
                             }
@@ -145,10 +147,12 @@ namespace Reportes
                         if (aux.Rows.Count > 0)
                         {
                             pnlFiltro.Visible = true;
+                            lblTotalRegistros.Text = String.Format("{0} registros", aux.Rows.Count);
                         }
                         else
                         {
                             txtFiltroNombre.Text = String.Empty;
+                            lblTotalRegistros.Text = String.Empty;
                             pnlFiltro.Visible = false;
                             ShowMessage(true, "No fueron encontrados registros con dichos criterios de búsqueda");
                         }
@@ -171,6 +175,8 @@ namespace Reportes
                 txtFechaAutorizacion.Text = String.Empty;
                 ddlAutorizadoPor.SelectedValue = "0";
                 ddlMotivoNoReportar.SelectedValue = "0";
+                this.ClearPerfilTransaccional();
+
                 BindData();
             }
             catch (Exception ex)
@@ -201,7 +207,7 @@ namespace Reportes
                     EditFields(true);
                     //txtFechaAutorizacion.Text = DateTime.Now.ToString("dd/MM/yyyy");
                     rblReportar.SelectedValue = "NO";
-                    rblReportar.Enabled = false;
+                    //rblReportar.Enabled = false;
 
                     //String ID = gvInformation.SelectedRow.Cells[0].Text;
                     //txtCriterioPLD.Text = ReportsOperations.GetDescripcionOperacion(ID);
@@ -227,7 +233,8 @@ namespace Reportes
             btnGuardar.Visible = flag;
             //ddlAutorizadoPor.SelectedValue = "0";
             //ddlMotivoNoReportar.SelectedValue = "0";
-            //txtCriterioPLD.Text = String.Empty;
+            txtCriterioPLD.Enabled = flag;
+            rblReportar.Enabled = flag;
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -236,7 +243,8 @@ namespace Reportes
             {
                 if (gvInformation.SelectedRow != null)
                 {
-                    ReportsOperations.UpdateRegistro(gvInformation.SelectedRow.Cells[0].Text, ddlAutorizadoPor.SelectedItem.Text, ddlMotivoNoReportar.SelectedItem.Text, DateTime.ParseExact(txtFechaAutorizacion.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture));
+                    bool reportar = rblReportar.SelectedItem.Value == "SI" ? true : false;
+                    ReportsOperations.UpdateRegistro(gvInformation.SelectedRow.Cells[0].Text, ddlAutorizadoPor.SelectedItem.Text, ddlMotivoNoReportar.SelectedItem.Text, DateTime.ParseExact(txtFechaAutorizacion.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture), reportar, txtCriterioPLD.Text.Trim());
                     ShowMessage(false);
                     ddlAutorizadoPor.SelectedValue = "0";
                     ddlMotivoNoReportar.SelectedValue = "0";
@@ -269,49 +277,59 @@ namespace Reportes
             txtFechaAutorizacion.Text = String.Empty;
             ddlAutorizadoPor.SelectedValue = "0";
             ddlMotivoNoReportar.SelectedValue = "0";
+            try {
 
-            foreach (GridViewRow row in gvInformation.Rows)
-            {
-                if (row.RowIndex == gvInformation.SelectedIndex) //when row is selected
+                foreach (GridViewRow row in gvInformation.Rows)
                 {
-                    row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
-                    row.ToolTip = String.Empty;
-                    //fill values when row is clicked
-                    txtFechaAutorizacion.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                    String ID = gvInformation.SelectedRow.Cells[0].Text;
-                    txtCriterioPLD.Text = ReportsOperations.GetDescripcionOperacion(ID);
-
-                    string calificar;
-                    if(ddlTipoReporte.SelectedItem.Value == "3" || ddlTipoReporte.SelectedItem.Value == "4") //para los reportes internas preocupantes y 24 horas no existe la columna número de control, por eso es una posición antes
+                    if (row.RowIndex == gvInformation.SelectedIndex) //when row is selected
                     {
-                        calificar = row.Cells[5].Text;
-                    }
-                    else
-                    {
-                        calificar = row.Cells[6].Text;
-                    }
+                        row.BackColor = ColorTranslator.FromHtml("#A1DCF2");
+                        row.ToolTip = String.Empty;
+                        //fill values when row is clicked
+                        txtFechaAutorizacion.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                        String ID = gvInformation.SelectedRow.Cells[0].Text;
+                        txtCriterioPLD.Text = ReportsOperations.GetDescripcionOperacion(ID);
 
-                    if (calificar != "NO") 
-                    { //inusuales y no reportados no se pueden modificar
-                        if (ddlTipoReporte.SelectedItem.Value != "1" && ddlTipoReporte.SelectedItem.Value != "7")
+                        string calificar;
+                        if (ddlTipoReporte.SelectedItem.Value == "3" || ddlTipoReporte.SelectedItem.Value == "4") //para los reportes internas preocupantes y 24 horas no existe la columna número de control, por eso es una posición antes
                         {
-                            btnEditar.Visible = true;
+                            calificar = row.Cells[5].Text;
                         }
+                        else
+                        {
+                            calificar = row.Cells[6].Text;
+                        }
+
+                        //set text to perfil transaccional 
+                        this.SetPerfilTransaccional(row.Cells[4].Text.Trim());
+
+
+                        if (calificar != "NO")
+                        { //inusuales y no reportados no se pueden modificar
+                            if (ddlTipoReporte.SelectedItem.Value != "1" && ddlTipoReporte.SelectedItem.Value != "7")
+                            {
+                                btnEditar.Visible = true;
+                            }
+                        }
+                        else
+                        {
+                            ReportsOperations.InformationOperacion data = ReportsOperations.GetInformationOperacion(ID);
+                            ddlAutorizadoPor.SelectedIndex = ddlAutorizadoPor.Items.IndexOf(ddlAutorizadoPor.Items.FindByText(data.autorizadoPor));
+                            txtFechaAutorizacion.Text = data.fechaAutorizacion;
+                            ddlMotivoNoReportar.SelectedIndex = ddlMotivoNoReportar.Items.IndexOf(ddlMotivoNoReportar.Items.FindByText(data.motivoParaNoReportar));
+                        }
+
                     }
                     else
                     {
-                        ReportsOperations.InformationOperacion data = ReportsOperations.GetInformationOperacion(ID);
-                        ddlAutorizadoPor.SelectedIndex = ddlAutorizadoPor.Items.IndexOf(ddlAutorizadoPor.Items.FindByText(data.autorizadoPor));
-                        txtFechaAutorizacion.Text = data.fechaAutorizacion;
-                        ddlMotivoNoReportar.SelectedIndex = ddlMotivoNoReportar.Items.IndexOf(ddlMotivoNoReportar.Items.FindByText(data.motivoParaNoReportar));
+                        row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
+                        row.ToolTip = "Click to select this row.";
                     }
-
                 }
-                else
-                {
-                    row.BackColor = ColorTranslator.FromHtml("#FFFFFF");
-                    row.ToolTip = "Click to select this row.";
-                }
+            }
+            catch (Exception ex)
+            {
+                ShowMessage(true, ex.Message);
             }
 
         }
@@ -330,6 +348,32 @@ namespace Reportes
             ddlAutorizadoPor.SelectedValue = "0";
             ddlMotivoNoReportar.SelectedValue = "0";
             txtCriterioPLD.Text = String.Empty;
+        }
+
+        private void SetPerfilTransaccional(String custID)
+        {
+            try
+            {
+                ReportsOperations.PerfilTransaccional perfilTran = ReportsOperations.GetPerfilTransaccional(custID);
+                txtActividadPrep.Text = perfilTran.actividadPrep;
+                txtManejoEfectivo.Text = perfilTran.manejoEfec;
+                txtMontoEfectivoMensual.Text = perfilTran.montoEfectivoMensual;
+                txtNumEstimadoMovMensual.Text = perfilTran.numeroEstimadoMovimientos;
+                txtMontoEstimadoMensual.Text = perfilTran.montoEstimadoMensual;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void ClearPerfilTransaccional()
+        {
+            txtActividadPrep.Text = String.Empty;
+            txtManejoEfectivo.Text = String.Empty;
+            txtMontoEfectivoMensual.Text = String.Empty;
+            txtNumEstimadoMovMensual.Text = String.Empty;
+            txtMontoEstimadoMensual.Text = String.Empty;
         }
     
         protected void btnActualizar_Click(object sender, EventArgs e)

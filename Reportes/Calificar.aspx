@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calificar.aspx.cs" Inherits="Reportes.Calificar" EnableEventValidation="false" MaintainScrollPositionOnPostback="true"%>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Calificar.aspx.cs" Inherits="Reportes.Calificar" EnableEventValidation="false" MaintainScrollPositionOnPostback="true" %>
 
 <!DOCTYPE html>
 
@@ -237,22 +237,25 @@
                 </asp:UpdateProgress>
                 <asp:Panel ID="pnlFiltro" runat="server" Visible="false">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                             <table class="table-hover" style="margin-bottom: 0px;">
                                 <tr>
-                                    <td class="col-sm-5 text-right">
+                                    <td class="col-sm-4 text-right">
                                         <asp:Label ID="lblFiltroNombre" Text="Filtrar por nombre:" runat="server"></asp:Label>
                                     </td>
-                                    <td class="col-sm-6 text-left">
+                                    <td class="col-sm-5 text-left">
                                         <asp:TextBox ID="txtFiltroNombre" runat="server" CssClass="form-control" Width="100%"></asp:TextBox>
                                     </td>
                                     <td class="col-sm-1 text-left">
                                         <asp:ImageButton ID="btnBuscarPorNombre" ImageUrl="~/Images/search.png" runat="server" OnClick="btnBuscarPorNombre_Click" Height="60%" />
                                     </td>
+                                    <td class="col-sm-2 text-right">
+                                        <asp:Label ID="lblTotalRegistros" runat="server"></asp:Label>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-5">
                             <div class="text-center">
                                 <asp:Button ID="btnExportToExcel" runat="server" CssClass="btn btn-primary top-buffer" Text="Exportar a excel" OnClick="btnExportToExcel_Click" />
                             </div>
@@ -355,8 +358,9 @@
                 -->
                     <div class="row">
                         <div class="col-sm-12">
+                            <h4><strong>Calificar</strong></h4>
                             <div class="text-center">
-                                <asp:Button ID="btnEditar" runat="server" Text="Editar" Visible="false" CssClass="btn btn-primary top-buffer" OnClick="btnEditar_Click" style="margin-top: -30px;"/>
+                                <asp:Button ID="btnEditar" runat="server" Text="Editar" Visible="false" CssClass="btn btn-primary top-buffer" OnClick="btnEditar_Click" Style="margin-top: -30px;" />
                             </div>
                             <table class="table table-hover">
                                 <tr>
@@ -403,13 +407,54 @@
                                         <asp:Label ID="lblCriterioPLD" Text="Criterio PLD:" runat="server"></asp:Label>
                                     </td>
                                     <td class="col-sm-8">
-                                        <asp:TextBox ID="txtCriterioPLD" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        <asp:TextBox ID="txtCriterioPLD" runat="server" CssClass="form-control" Enabled="false" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
                             <div class="text-center">
                                 <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar" CssClass="btn btn-primary top-buffer" ValidationGroup="Guardar" Visible="false" />
                             </div>
+                            <asp:Panel ID="pnlPerfilTransac" runat="server" Enabled="false">
+                                <h4><strong>Perfil transaccional </strong></h4>
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td class="col-sm-2">
+                                            <asp:Label ID="lblActividadPrep" Text="Actividad preponderante:" runat="server"></asp:Label>
+                                        </td>
+                                        <td class="col-sm-6">
+                                            <asp:TextBox ID="txtActividadPrep" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </td>
+                                        <td class="col-sm-2">
+                                            <asp:Label ID="lblManejoEfectivo" Text="Manejo efectivo:" runat="server"></asp:Label>
+                                        </td>
+                                        <td class="col-sm-2">
+                                            <asp:TextBox ID="txtManejoEfectivo" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td class="col-sm-2">
+                                            <asp:Label ID="lblMontoEfectivoMensual" Text="Monto efectivo mensual:" runat="server"></asp:Label>
+                                        </td>
+                                        <td class="col-sm-2">
+                                            <asp:TextBox ID="txtMontoEfectivoMensual" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </td>
+                                        <td class="col-sm-2">
+                                            <asp:Label ID="lblNumEstimadoMovMensual" Text="Número estimado de movimientos mensuales:" runat="server"></asp:Label>
+                                        </td>
+                                        <td class="col-sm-2">
+                                            <asp:TextBox ID="txtNumEstimadoMovMensual" runat="server" CssClass="form-control"></asp:TextBox>
+                                        </td>
+                                        <td class="col-sm-2">
+                                            <asp:Label ID="lblMontoEstimadoMensual" Text="Monto estimado de movimientos mensuales:" runat="server"></asp:Label>
+                                        </td>
+                                        <td class="col-sm-2">
+                                            <asp:TextBox ID="txtMontoEstimadoMensual" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
                         </div>
                     </div>
                 </div>
