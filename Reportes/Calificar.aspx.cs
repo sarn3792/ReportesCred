@@ -44,6 +44,7 @@ namespace Reportes
         public void ClearData()
         {
             lblMensaje.Visible = false;
+            rfvMotivoNoReportar.Visible = true;
             //cbFechas.Checked = false;
             //btnEditar.Visible = false;
         }
@@ -244,11 +245,14 @@ namespace Reportes
                 if (gvInformation.SelectedRow != null)
                 {
                     bool reportar = rblReportar.SelectedItem.Value == "SI" ? true : false;
-                    ReportsOperations.UpdateRegistro(gvInformation.SelectedRow.Cells[0].Text, ddlAutorizadoPor.SelectedItem.Text, ddlMotivoNoReportar.SelectedItem.Text, DateTime.ParseExact(txtFechaAutorizacion.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture), reportar, txtCriterioPLD.Text.Trim());
+                    string motivo = reportar ? txtMotivoSiReportar.Text.Trim() : ddlMotivoNoReportar.SelectedItem.Text;
+                    ReportsOperations.UpdateRegistro(gvInformation.SelectedRow.Cells[0].Text, ddlAutorizadoPor.SelectedItem.Text, motivo , DateTime.ParseExact(txtFechaAutorizacion.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture), reportar, txtCriterioPLD.Text.Trim());
                     ShowMessage(false);
                     ddlAutorizadoPor.SelectedValue = "0";
                     ddlMotivoNoReportar.SelectedValue = "0";
                     txtCriterioPLD.Text = String.Empty;
+                    txtMotivoSiReportar.Text = String.Empty;
+                    rfvMotivoNoReportar.Visible = false;
                     btnEditar.Visible = false;
 
                     BindData();

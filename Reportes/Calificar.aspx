@@ -114,7 +114,7 @@
     </style>
     <script>
         $(document).ready(function () {
-            $("#<%= txtDel.ClientID %>").datepicker({
+            <%--$("#<%= txtDel.ClientID %>").datepicker({
                 dateFormat: "dd/mm/yy"
             });
 
@@ -124,7 +124,7 @@
 
             $("#<%= txtFechaAutorizacion.ClientID %>").datepicker({
                 dateFormat: "dd/mm/yy"
-            });
+            });--%>
 
             //enable or disable date fields
             $("#cbFechas").change(function () {
@@ -137,8 +137,29 @@
                     $("#txtHasta").prop('disabled', true);
                 }
             });
-        });
 
+            $('#SiReportar').hide(); //on load hide
+
+            //rblYesNo
+            $('#<%=rblReportar.ClientID %>').change(function () {
+                if ($('#<%=rblReportar.ClientID %> input:checked').val() == 'SI') {
+                    $('#<%=lblMotivoNoReportar.ClientID %>').html("Motivo para reportar");
+                    $('#SiReportar').show();
+                    document.getElementById("<%=rfvMotivoSiReportar.ClientID %>").enabled = true;
+
+                    $('#NoReportar').hide();
+                    document.getElementById("<%=rfvMotivoNoReportar.ClientID %>").enabled = false;
+                }
+                else {
+                    $('#<%=lblMotivoNoReportar.ClientID %>').html("Motivo para no reportar");
+                    $('#SiReportar').hide();
+                    document.getElementById("<%=rfvMotivoSiReportar.ClientID %>").enabled = false;
+
+                    $('#NoReportar').show();
+                    document.getElementById("<%=rfvMotivoNoReportar.ClientID %>").enabled = true;
+                }
+            });
+        });
     </script>
     <title>Calificar</title>
 </head>
@@ -146,7 +167,7 @@
     <form id="form1" runat="server">
         <asp:Panel ID="pnlDefault" runat="server" DefaultButton="btnBuscarPorNombre">
             <asp:ScriptManager ID="scpManager" runat="server" EnablePartialRendering="true"></asp:ScriptManager>
-            <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar navbar-inverse navbar-fixed-top" id="navbar">
                 <div class="container">
                     <ul class="nav navbar-nav">
                         <li><a href="Default.aspx">Inicio</a></li>
@@ -393,9 +414,16 @@
                                     <td class="col-sm-2">
                                         <asp:Label ID="lblMotivoNoReportar" Text="Motivo para no reportar:" runat="server"></asp:Label>
                                     </td>
-                                    <td class="col-sm-8">
-                                        <asp:DropDownList ID="ddlMotivoNoReportar" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:DropDownList>
-                                        <asp:RequiredFieldValidator ID="rfvMotivoNoReportar" runat="server" ControlToValidate="ddlMotivoNoReportar" InitialValue="0" Text="Selecciona motivo" ValidationGroup="Guardar" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <td>
+                                        <div id="NoReportar">
+                                            <asp:DropDownList ID="ddlMotivoNoReportar" runat="server" CssClass="form-control input-sm" Enabled="false"></asp:DropDownList>
+                                            <asp:RequiredFieldValidator ID="rfvMotivoNoReportar" runat="server" ControlToValidate="ddlMotivoNoReportar" InitialValue="0" Text="Selecciona motivo" ValidationGroup="Guardar" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        </div>
+                                        <div id="SiReportar">
+                                            <asp:TextBox ID="txtMotivoSiReportar" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="rfvMotivoSiReportar" ControlToValidate="txtMotivoSiReportar" runat="server" ValidationGroup="Guardar" Text="Ingrese motivo para reportar" ForeColor="Red" Enabled="false">
+                                            </asp:RequiredFieldValidator>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>

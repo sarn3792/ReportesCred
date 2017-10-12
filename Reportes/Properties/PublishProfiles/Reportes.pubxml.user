@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\sramirez\Documents\Publications\Reportes</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\admincrm\Documents\publish\Reportes</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -16,7 +16,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 11:24:43</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>07/12/2015 19:04:38</publishTime>
+      <publishTime>12/07/2015 19:04:38</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
       <publishTime>06/06/2016 15:40:16</publishTime>
@@ -40,7 +40,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/15/2015 02:06:24</publishTime>
     </File>
     <File Include="bin/Reportes.dll">
-      <publishTime>10/03/2016 11:17:02</publishTime>
+      <publishTime>10/12/2017 18:03:39</publishTime>
     </File>
     <File Include="bin/Reportes.pdb">
       <publishTime>10/03/2016 11:17:02</publishTime>
@@ -81,6 +81,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
+    <File Include="Calificar.aspx">
+      <publishTime>10/12/2017 17:53:59</publishTime>
+    </File>
     <File Include="Content/bootstrap-theme.css">
       <publishTime>09/23/2016 11:27:57</publishTime>
     </File>
@@ -105,8 +108,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>09/23/2016 11:27:57</publishTime>
     </File>
+    <File Include="Criterios.aspx">
+      <publishTime>07/26/2017 12:22:51</publishTime>
+    </File>
     <File Include="Default.aspx">
-      <publishTime>09/29/2016 16:28:45</publishTime>
+      <publishTime>07/26/2017 12:19:40</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
       <publishTime>09/23/2016 11:27:57</publishTime>
@@ -125,6 +131,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Images/credijalrecor.PNG">
       <publishTime>09/29/2016 13:38:11</publishTime>
+    </File>
+    <File Include="Images/Progreso.gif">
+      <publishTime>10/06/2016 12:28:21</publishTime>
+    </File>
+    <File Include="Images/search.png">
+      <publishTime>12/20/2016 10:36:32</publishTime>
+    </File>
+    <File Include="InternasPreocupantes.aspx">
+      <publishTime>01/31/2017 11:24:48</publishTime>
+    </File>
+    <File Include="Inusuales.aspx">
+      <publishTime>01/31/2017 11:21:31</publishTime>
+    </File>
+    <File Include="Login.aspx">
+      <publishTime>01/31/2017 09:56:35</publishTime>
+    </File>
+    <File Include="Logout.aspx">
+      <publishTime>01/31/2017 10:19:12</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>09/23/2016 11:27:58</publishTime>
@@ -151,7 +175,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 11:27:55</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/29/2016 13:06:24</publishTime>
+      <publishTime>10/12/2017 18:03:39</publishTime>
     </File>
   </ItemGroup>
 </Project>

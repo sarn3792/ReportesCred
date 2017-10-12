@@ -481,6 +481,24 @@ namespace Reportes {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMotivoNoReportar;
         
         /// <summary>
+        /// txtMotivoSiReportar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMotivoSiReportar;
+        
+        /// <summary>
+        /// rfvMotivoSiReportar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMotivoSiReportar;
+        
+        /// <summary>
         /// lblCriterioPLD control.
         /// </summary>
         /// <remarks>
