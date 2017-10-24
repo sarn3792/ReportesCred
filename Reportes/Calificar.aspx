@@ -114,7 +114,7 @@
     </style>
     <script>
         $(document).ready(function () {
-            <%--$("#<%= txtDel.ClientID %>").datepicker({
+            $("#<%= txtDel.ClientID %>").datepicker({
                 dateFormat: "dd/mm/yy"
             });
 
@@ -124,7 +124,7 @@
 
             $("#<%= txtFechaAutorizacion.ClientID %>").datepicker({
                 dateFormat: "dd/mm/yy"
-            });--%>
+            });
 
             //enable or disable date fields
             $("#cbFechas").change(function () {

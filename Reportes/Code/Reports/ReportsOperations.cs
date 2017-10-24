@@ -216,7 +216,7 @@ namespace Reportes
                                             x.NumCueConOpe 'Número de control', x.ReciboDePago 'Recibo de pago', 'SI' as Reportar, T.TipoOperacion 'Tipo de operación', 
                                             FORMAT(convert(datetime,convert(varchar(10),x.FechaDetOper, 120)), 'dd/MM/yyyy') 'Periodo detectado', CONVERT(varchar, CAST(x.Monto AS money), 1) 'Monto', x.Moneda
                                             FROM xCnbvSOFOMES x LEFT JOIN xCNBVTipoOperacion T ON X.TipoOperacion =  T.IDTipoOperacion
-                                            WHERE x.Estatus = 'SI' OR x.Estatus IS NULL ");
+                                            WHERE (x.Estatus = 'SI' OR x.Estatus IS NULL) ");
                         break;
 
                     case "7":
